@@ -1,0 +1,11 @@
+Színkódok:
+
+Háttér: alap fehér
+#FFFFFF
+
+Szövegek: sötétkék
+#323748
+
+
+Ikonok, képek stb:világoskék
+#0098DA
