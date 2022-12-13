@@ -7,6 +7,7 @@ import {
   Image,
   TextInput,
   ScrollView,
+  Pressable,
 } from "react-native";
 import {
   ChevronDownIcon,
@@ -18,12 +19,17 @@ import Categories from "../components/Categories";
 import FeaturedRow from "../components/FeaturedRow";
 import { useState, useEffect } from "react";
 import { db } from "../fireBase";
+import { auth } from "../fireBase";
 
-export const Home = () => {
+export default Home = () => {
   const navigation = useNavigation();
   let unsub;
 
   const [serviceTypesDBData, setServiceTypesDBData] = useState([]);
+
+  const signOut = () => {
+    auth.signOut();
+  };
 
   //screenMount
   useLayoutEffect(() => {
@@ -106,6 +112,12 @@ export const Home = () => {
           );
         })}
       </ScrollView>
+
+      <Pressable onPress={signOut}>
+        <View className="w-full bg-white rounded-md border py-2">
+          <Text className="select-none text-center">Kijelentkezés</Text>
+        </View>
+      </Pressable>
     </SafeAreaView>
   );
 };

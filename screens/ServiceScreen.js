@@ -29,7 +29,7 @@ const ServiceScreen = () => {
         <TouchableOpacity
           onPress={navigation.goBack}
           hitSlop={{ top: 20, bottom: 20, left: 50, right: 50 }}
-          className="p-2 bg-gray-100 rounded-full"
+          className="p-2 bg-[#e3e3e3] rounded-full"
         >
           <ArrowLeftIcon size={20} color={COLORS.primary} />
         </TouchableOpacity>

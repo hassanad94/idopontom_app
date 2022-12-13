@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, Text, Button, Platform } from "react-native";
+import { View } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
 const Calendar = ({ handleDate, date }) => {

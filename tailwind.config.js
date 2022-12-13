@@ -5,12 +5,14 @@ module.exports = {
     "./<custom directory>/**/*.{js,jsx,ts,tsx}",
     "./screens/*.{js,jsx,ts,tsx}",
     "./components/*.{js,jsx,ts,tsx}",
+    "./components/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
     extend: {
       colors: {
         primary: "#0098da",
         font: "#323748",
+        basebg: "#f2f2f2",
       },
     },
   },

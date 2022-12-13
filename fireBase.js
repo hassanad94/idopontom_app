@@ -1,15 +1,18 @@
 import firebase from "firebase/compat";
+import "firebase/compat/auth";
 
 import "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBMKzuw7tIkrz3YkshfsjY9GmiLdwgaNi4",
-  authDomain: "idopontom-72426.firebaseapp.com",
-  projectId: "idopontom-72426",
-  storageBucket: "idopontom-72426.appspot.com",
-  messagingSenderId: "718795439527",
-  appId: "1:718795439527:web:60d7a5b58a85d006630a82",
-  measurementId: "G-MSBH0GR6HJ",
+  apiKey: "AIzaSyAyrXLhRmEIwPexbAEjLY53WXwDc2Ud_AI",
+  authDomain: "idopontom.firebaseapp.com",
+  databaseURL:
+    "https://idopontom-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "idopontom",
+  storageBucket: "idopontom.appspot.com",
+  messagingSenderId: "402961395983",
+  appId: "1:402961395983:web:ec242a04dd3aa16f4b8e7a",
+  measurementId: "G-42N7V7ZNB2",
 };
 
 let app;
@@ -20,4 +23,8 @@ if (!firebase.apps.length) {
 
 const db = app.firestore();
 
-export { db };
+const auth = firebase.auth();
+
+const fireBaseObj = app;
+
+export { db, auth, fireBaseObj };

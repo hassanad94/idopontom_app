@@ -1,9 +1,9 @@
 import { View, Text } from "react-native";
 
-const TimeBrick = () => {
+const TimeBrick = ({ value }) => {
   return (
-    <View>
-      <Text>TimeBrick</Text>
+    <View className="border border-primary basis-[90px] py-3 mx-[5px] items-center justify-center mb-2">
+      <Text className="text-primary">{value}</Text>
     </View>
   );
 };

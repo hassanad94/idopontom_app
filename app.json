@@ -34,6 +34,15 @@
       "sourceExts": [
         "cjs"
       ]
-    }
+    },
+    "scheme":"idopontom",
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Engedély Kérés Profilkép kiválasztásra"
+        }
+      ]
+    ]
   }
 }
