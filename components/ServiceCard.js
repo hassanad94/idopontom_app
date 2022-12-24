@@ -2,21 +2,55 @@ import { useNavigation } from "@react-navigation/native";
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import { MapPinIcon } from "react-native-heroicons/outline";
 import { SvgUri } from "react-native-svg";
+import { db, docID } from "../fireBase";
 
 import { SHADOWS } from "../utilities";
+import { useEffect, useState } from "react";
 
-const ServiceCard = (...props) => {
-  const { id, imgUrl, title, rating, address, shortDescription } = props[0];
+const ServiceCard = ({provider}) => {
 
   const navigation = useNavigation();
+
+  const [providerData, setProviderData] = useState({});
+
+
+
+  // let providerData = {};
+
+  useEffect(() => {
+    
+    let unsub = db.collection( "Providers" ).where( docID , "==",  provider )
+    .onSnapshot((snapshot) => {
+
+      snapshot.docs.forEach((doc) => {
+        let fbdata;
+        
+        fbdata = {
+          id: doc.id,
+          data: doc.data(),
+        };
+        
+        setProviderData( fbdata );
+      });
+    });
+
+    return unsub;
+
+  }, []);
+
+  console.log( providerData );
+
+
+
+  const { imageUrl, name, rating, address, shortDescription } = providerData.data || {};
 
   return (
     <TouchableOpacity
       onPress={() => {
         navigation.navigate("Service", {
           id,
-          imgUrl,
-          title,
+          imageUrl,
+          name,
           rating,
           address,
           shortDescription,
@@ -26,12 +60,12 @@ const ServiceCard = (...props) => {
       style={{ ...SHADOWS.dark }}
     >
       <Image
-        source={{ uri: imgUrl }}
+        source={{ uri: imageUrl }}
         className="h-36 w-64 rounded-t-lg drop-shadow"
       />
 
       <View className="px-3 py-2 flex-row items-center justify-between">
-        <Text className="font-bold text-lg">{title}</Text>
+        <Text className="font-bold text-lg">{name}</Text>
 
         <View className="flex-row justify-center items-center">
           <Text className="text-primary">{rating} </Text>

@@ -27,6 +27,8 @@ const db = app.firestore();
 
 const auth = firebase.auth();
 
+const docID = firebase.firestore.FieldPath.documentId();
+
 const fireBaseObj = app;
 
-export { db, auth, fireBaseObj };
+export { db, auth, fireBaseObj, docID};

@@ -20,6 +20,7 @@ import FeaturedRow from "../components/FeaturedRow";
 import { useState, useEffect } from "react";
 import { db } from "../fireBase";
 import Logout from "../components/Buttons/Logout";
+import ServiceCard from "../components/ServiceCard";
 
 export default Home = () => {
   const navigation = useNavigation();
@@ -124,16 +125,38 @@ export default Home = () => {
         <Categories categories={categories} />
 
         {categories?.map((category) => {
-          const { name, description, providers } = category.data;
+          const { title, providers } = category.data;
 
           return (
-            <FeaturedRow
-              key={category.id}
-              type={name}
-              description={description}
-              id={category.id}
-              providers={providers}
-            />
+            <View key={category.id}>
+              {/* <FeaturedRow
+                key={category.id}
+                type={name}
+                description={description}
+                id={category.id}
+                providers={providers}
+              /> */}
+
+              <Text>{category.id}</Text>
+
+              <ScrollView
+                horizontal
+                contentContainerStyle={{ paddingHorizontal: 15 }}
+                showsHorizontalScrollIndicator={false}
+                className="pt-4"
+              >
+
+                {providers.map( (provider) => {
+
+                  return <ServiceCard key={provider} provider={provider}  />
+
+                  } ) 
+                }
+
+              </ScrollView>
+
+
+            </View>
           );
         })}
 

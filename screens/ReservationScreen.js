@@ -28,7 +28,7 @@ const ReservationScreen = () => {
   const handleDate = (date) => (temporaryDate = date);
 
   useEffect(() => {
-    console.log(date, temporaryDate);
+    // console.log(date, temporaryDate);
 
     // return () => {
     //   second
