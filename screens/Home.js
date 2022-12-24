@@ -19,7 +19,6 @@ import Categories from "../components/Categories";
 import FeaturedRow from "../components/FeaturedRow";
 import { useState, useEffect } from "react";
 import { db } from "../fireBase";
-import { auth } from "../fireBase";
 import Logout from "../components/Buttons/Logout";
 
 export default Home = () => {
@@ -38,26 +37,26 @@ export default Home = () => {
   }, []);
 
   //Providers
-  useEffect(() => {
-    unsub = db.collection("Providers").onSnapshot((snapshot) => {
-      setProviders([]);
+  // useEffect(() => {
+  //   unsub = db.collection("Providers").onSnapshot((snapshot) => {
+  //     setProviders([]);
 
-      snapshot.docs.forEach((doc) => {
-        let fbdata;
+  //     snapshot.docs.forEach((doc) => {
+  //       let fbdata;
 
-        fbdata = {
-          id: doc.id,
-          data: doc.data(),
-        };
+  //       fbdata = {
+  //         id: doc.id,
+  //         data: doc.data(),
+  //       };
 
-        setProviders((prev) => [...prev, fbdata]);
-      });
+  //       setProviders((prev) => [...prev, fbdata]);
+  //     });
 
-    });
+  //   });
 
-    return unsub;
+  //   return unsub;
 
-  }, []);
+  // }, []);
 
   //Categories
   useEffect(() => {
@@ -72,8 +71,6 @@ export default Home = () => {
           id: doc.id,
           data: doc.data(),
         };
-
-        console.log(fbdata);
 
         setCategories((prev) => [...prev, fbdata]);
       });
@@ -126,24 +123,8 @@ export default Home = () => {
         {/* Categories */}
         <Categories categories={categories} />
 
-        {/* Providers */}
-
-        { categories?.map( (category) =>{
-
-          const { id : categoryID } = category;
-
-          var filterProvidersByCategoryID = providers.filter( ( provider ) => {
-
-            const { category } = provider;
-
-            return category === categoryID
-
-          } )
-
-        } ) }
-
-        {providers?.map((category) => {
-          const { name, description } = category.data;
+        {categories?.map((category) => {
+          const { name, description, providers } = category.data;
 
           return (
             <FeaturedRow
@@ -151,9 +132,12 @@ export default Home = () => {
               type={name}
               description={description}
               id={category.id}
+              providers={providers}
             />
           );
         })}
+
+
       </ScrollView>
 
         <Logout/>
