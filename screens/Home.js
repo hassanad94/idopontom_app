@@ -20,16 +20,15 @@ import FeaturedRow from "../components/FeaturedRow";
 import { useState, useEffect } from "react";
 import { db } from "../fireBase";
 import { auth } from "../fireBase";
+import Logout from "../components/Buttons/Logout";
 
 export default Home = () => {
   const navigation = useNavigation();
   let unsub;
 
-  const [serviceTypesDBData, setServiceTypesDBData] = useState([]);
+  const [providers, setProviders] = useState([]);
 
-  const signOut = () => {
-    auth.signOut();
-  };
+  const [categories, setCategories] = useState(null)
 
   //screenMount
   useLayoutEffect(() => {
@@ -38,9 +37,10 @@ export default Home = () => {
     });
   }, []);
 
+  //Providers
   useEffect(() => {
-    unsub = db.collection("serviceTypes").onSnapshot((snapshot) => {
-      setServiceTypesDBData([]);
+    unsub = db.collection("Providers").onSnapshot((snapshot) => {
+      setProviders([]);
 
       snapshot.docs.forEach((doc) => {
         let fbdata;
@@ -50,12 +50,41 @@ export default Home = () => {
           data: doc.data(),
         };
 
-        setServiceTypesDBData((prev) => [...prev, fbdata]);
+        setProviders((prev) => [...prev, fbdata]);
       });
+
     });
 
     return unsub;
+
   }, []);
+
+  //Categories
+  useEffect(() => {
+
+    unsub = db.collection("categories").onSnapshot((snapshot) => {
+      setCategories([]);
+
+      snapshot.docs.forEach((doc) => {
+        let fbdata;
+
+        fbdata = {
+          id: doc.id,
+          data: doc.data(),
+        };
+
+        console.log(fbdata);
+
+        setCategories((prev) => [...prev, fbdata]);
+      });
+
+    });
+
+    return unsub;
+
+  }, []);
+
+
   return (
     <SafeAreaView className="bg-white px-2">
       {/* Header */}
@@ -95,11 +124,25 @@ export default Home = () => {
         contentContainerStyle={{ paddingBottom: 120 }}
       >
         {/* Categories */}
-        <Categories categories={serviceTypesDBData} />
+        <Categories categories={categories} />
 
-        {/* Featured */}
+        {/* Providers */}
 
-        {serviceTypesDBData?.map((category) => {
+        { categories?.map( (category) =>{
+
+          const { id : categoryID } = category;
+
+          var filterProvidersByCategoryID = providers.filter( ( provider ) => {
+
+            const { category } = provider;
+
+            return category === categoryID
+
+          } )
+
+        } ) }
+
+        {providers?.map((category) => {
           const { name, description } = category.data;
 
           return (
@@ -113,11 +156,8 @@ export default Home = () => {
         })}
       </ScrollView>
 
-      <Pressable onPress={signOut}>
-        <View className="w-full bg-white rounded-md border py-2">
-          <Text className="select-none text-center">Kijelentkezés</Text>
-        </View>
-      </Pressable>
+        <Logout/>
+
     </SafeAreaView>
   );
 };

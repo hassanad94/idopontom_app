@@ -9,9 +9,9 @@ const Categories = ({ categories }) => {
       contentContainerStyle={{ paddingHorizontal: 15, paddingTop: 10 }}
     >
       {categories?.map((category) => {
-        const { name, imgUrl } = category.data;
+        const { title, image } = category.data;
 
-        return <CategoryCard key={category.id} imgUrl={imgUrl} title={name} />;
+        return <CategoryCard key={category.id} imgUrl={image} title={title} />;
       })}
     </ScrollView>
   );

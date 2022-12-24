@@ -21,6 +21,8 @@ if (!firebase.apps.length) {
   app = firebase.initializeApp(firebaseConfig);
 }
 
+const rtDB = app.database()
+
 const db = app.firestore();
 
 const auth = firebase.auth();

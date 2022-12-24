@@ -2,6 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { auth } from "./fireBase";
 import { useState, useEffect } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import ReservationScreen from "./screens/ReservationScreen";
 import ServiceScreen from "./screens/ServiceScreen";
@@ -15,16 +16,48 @@ const Stack = createNativeStackNavigator();
 function App() {
   const [init, setInit] = useState(true);
   const [user, setUser] = useState(null);
+  const [storageUser, setStorageUser] = useState(null);
 
-  const onAuthStateChanged = (user) => {
+  const onAuthStateChanged = async (user) => {
     setUser(user);
+
+      try {
+        const userDataFromStorage = await AsyncStorage.setItem('IDOPONTOMUSER', JSON.stringify( user ) || ""  );
+
+        setStorageUser( userDataFromStorage );
+
+      } catch (e) {
+        console.error( e.message ); 
+      }
+
 
     if (init) setInit(false);
   };
 
+  const loadUser = async() =>{
+
+    try {
+      let userDataFromStorage = await AsyncStorage.getItem('IDOPONTOMUSER');
+
+      setUser(userDataFromStorage);
+
+    } catch (e) {
+
+      console.error( e.message ); 
+
+    }
+
+  }
+
   useEffect(() => {
     const subscriber = auth.onAuthStateChanged(onAuthStateChanged);
     return subscriber;
+  }, []);
+
+
+  //userLoad
+  useEffect(() => {
+    loadUser();
   }, []);
 
   if (init) return null;

@@ -7,8 +7,6 @@ import { COLORS } from "../utilities";
 import { SvgUri } from "react-native-svg";
 import OpenHours from "../components/OpenHours";
 import { openHourTestData, serviceTD } from "../testData";
-import { serviceTestData } from "../testData";
-import ServicesList from "../components/ServicesList";
 import ServiceRow from "../components/ServiceRow";
 const ServiceScreen = () => {
   const navigation = useNavigation();
