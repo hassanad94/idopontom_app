@@ -18,7 +18,7 @@ const ServiceScreen = () => {
   }, []);
 
   const {
-    params: { id, imgUrl, title, rating, address, shortDescription },
+    params: {provider, imgUrl, title, rating, address, shortDescription },
   } = useRoute();
 
   return (

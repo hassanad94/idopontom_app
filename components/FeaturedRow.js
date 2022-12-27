@@ -1,7 +1,7 @@
 import { View, Text } from "react-native";
 import { ArrowRightIcon } from "react-native-heroicons/outline";
 import { ScrollView } from "react-native";
-import ServiceCard from "./ServiceCard";
+import ServiceCard from "./ProviderCard";
 import { useState, useEffect } from "react";
 import { db } from "../fireBase";
 

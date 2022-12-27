@@ -20,7 +20,7 @@ import FeaturedRow from "../components/FeaturedRow";
 import { useState, useEffect } from "react";
 import { db } from "../fireBase";
 import Logout from "../components/Buttons/Logout";
-import ServiceCard from "../components/ServiceCard";
+import ServiceCard from "../components/ProviderCard";
 
 export default Home = () => {
   const navigation = useNavigation();

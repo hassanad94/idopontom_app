@@ -13,10 +13,6 @@ const ServiceCard = ({provider}) => {
 
   const [providerData, setProviderData] = useState({});
 
-
-
-  // let providerData = {};
-
   useEffect(() => {
     
     let unsub = db.collection( "Providers" ).where( docID , "==",  provider )
@@ -38,17 +34,13 @@ const ServiceCard = ({provider}) => {
 
   }, []);
 
-  console.log( providerData );
-
-
-
   const { imageUrl, name, rating, address, shortDescription } = providerData.data || {};
 
   return (
     <TouchableOpacity
       onPress={() => {
         navigation.navigate("Service", {
-          id,
+          provider,
           imageUrl,
           name,
           rating,
